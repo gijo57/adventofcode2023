@@ -1,4 +1,4 @@
-with open('input.txt') as f:
+with open('example.txt') as f:
     engine_schematic = [list(row) for row in f.read().split('\n')]
 
     def map_number_positions():
