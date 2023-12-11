@@ -27,7 +27,6 @@ with open('input.txt') as f:
         for coords in possible_neighbors.keys():
             neighbor_coords = (curr_pos[0] + coords[0], curr_pos[1] + coords[1])
             neighbor = pipe_map[neighbor_coords]
-
             if neighbor in possible_neighbors[coords]:
                 if tile == 'S':
                     neighbors.append(neighbor_coords)
@@ -45,10 +44,6 @@ with open('input.txt') as f:
     while reverse_pos != pos:
         reverse_tile = pipe_map[reverse_pos[0], reverse_pos[1]][0]
         tile = pipe_map[pos[0], pos[1]][0]
-        # print('----------')
-        # print('ROUND', steps)
-        # print('REVPOS', reverse_pos, 'TILE', reverse_tile)
-        # print('POS', pos, 'TILE', tile)
         reverse_pos, reverse_prev_pos = find_next_pos(reverse_tile, reverse_prev_pos, reverse_pos)
         pos, prev_pos = find_next_pos(tile, prev_pos, pos)
         steps += 1
