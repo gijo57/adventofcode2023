@@ -1,4 +1,4 @@
-with open('input.txt') as f:
+with open('test.txt') as f:
     engine_schematic = [list(row) for row in f.read().split('\n')]
 
     def map_number_positions():
@@ -46,6 +46,8 @@ with open('input.txt') as f:
         return part_numbers
 
     number_positions = map_number_positions()
+    print(number_positions)
     part_numbers = find_part_numbers(number_positions)
     result1 = sum(part_numbers)
+    print(part_numbers)
     print(result1)
