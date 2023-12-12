@@ -1,5 +1,7 @@
-with open('test.txt') as f:
-    engine_schematic = [list(row) for row in f.read().split('\n')]
+import numpy as np
+
+with open('example.txt') as f:
+    engine_schematic = np.pad(np.array([list(row) for row in f.read().split('\n')]), 1, 'constant', constant_values='.')
 
     def map_number_positions():
         number_indices = []
@@ -20,6 +22,8 @@ with open('test.txt') as f:
 
     def find_part_numbers(positions):
         part_numbers = []
+        gear_numbers = []
+
         for key, cols in positions:
             row_num, number = [int(val) for val in key.split('-')]
             row = engine_schematic[row_num]
@@ -32,22 +36,26 @@ with open('test.txt') as f:
                 row_neighbors = [row[prev_col], row[next_col]]
                 if any(not char.isdigit() and char != '.' for char in row_neighbors):
                     part_numbers.append(number)
+                    if any(char == '*' for char in row_neighbors):
+                        gear_numbers.append(number)
                     break
-                if prev_row:
-                    prev_row_neighbors = [prev_row[prev_col], prev_row[col], prev_row[next_col]]
-                    if any(not char.isdigit() and char != '.' for char in prev_row_neighbors):
+                prev_row_neighbors = [prev_row[prev_col], prev_row[col], prev_row[next_col]]
+                if any(not char.isdigit() and char != '.' for char in prev_row_neighbors):
                         part_numbers.append(number)
+                        if any(char == '*' for char in prev_row_neighbors):
+                            gear_numbers.append(number)
                         break
-                if next_row:
-                    next_row_neighbors = [next_row[prev_col], next_row[col], next_row[next_col]]
-                    if any(not char.isdigit() and char != '.' for char in next_row_neighbors):
+                next_row_neighbors = [next_row[prev_col], next_row[col], next_row[next_col]]
+                if any(not char.isdigit() and char != '.' for char in next_row_neighbors):
                         part_numbers.append(number)
+                        if any(char == '*' for char in next_row_neighbors):
+                            gear_numbers.append(number)
                         break
+        print(gear_numbers)
         return part_numbers
 
+
     number_positions = map_number_positions()
-    print(number_positions)
     part_numbers = find_part_numbers(number_positions)
     result1 = sum(part_numbers)
-    print(part_numbers)
     print(result1)
