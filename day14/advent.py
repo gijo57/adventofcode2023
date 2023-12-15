@@ -1,8 +1,6 @@
 import numpy as np
 import re
 import itertools
-import timeit
-start_time = timeit.default_timer()
 
 with open('input.txt') as f:
     platform = np.array([list(row.strip()) for row in f.readlines()])
@@ -19,6 +17,3 @@ with open('input.txt') as f:
 
     result1 = total_load
     print(result1)
-
-elapsed = timeit.default_timer() - start_time
-print((elapsed * 1000000000) / 60 / 60 / 24)
