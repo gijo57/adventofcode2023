@@ -1,6 +1,6 @@
 import numpy as np
 
-with open('example.txt') as f:
+with open('input.txt') as f:
     engine_schematic = np.pad(np.array([list(row) for row in f.read().split('\n')]), 1, 'constant', constant_values='.')
 
     def map_number_positions():
@@ -56,17 +56,17 @@ with open('example.txt') as f:
                         numbers = [n for n in number_positions if row_i == n[0]]
                         numbers = [n[1] for n in numbers if set(n[2]).intersection(set(cols_list))]
                         if (numbers):
-                            gear_ratio_numbers.append(int(numbers[0]))
+                            gear_ratio_numbers.extend([int(val) for val in numbers])
                     if ([n for n in number_positions if row_i-1 == n[0]]):
                         numbers = [n for n in number_positions if row_i-1 == n[0]]
                         numbers = [n[1] for n in numbers if set(n[2]).intersection(set(cols_list))]
                         if (numbers):
-                            gear_ratio_numbers.append(int(numbers[0]))
+                            gear_ratio_numbers.extend([int(val) for val in numbers])
                     if ([n for n in number_positions if row_i+1 == n[0]]):
                         numbers = [n for n in number_positions if row_i+1 == n[0]]
                         numbers = [n[1] for n in numbers if set(n[2]).intersection(set(cols_list))]
                         if (numbers):
-                            gear_ratio_numbers.append(int(numbers[0]))
+                            gear_ratio_numbers.extend([int(val) for val in numbers])
                     if len(gear_ratio_numbers) == 2:
                         ratios.append(gear_ratio_numbers[0] * gear_ratio_numbers[1])
         return ratios
