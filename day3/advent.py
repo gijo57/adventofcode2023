@@ -47,6 +47,7 @@ with open('input.txt') as f:
 
     def find_gear_ratios(number_positions, engine_schematic):
         ratios = []
+
         for row_i in range(1, len(engine_schematic)-1):
             for col_i in range(1, len(engine_schematic[row_i])-1):
                 if (engine_schematic[row_i][col_i] == '*'):
@@ -70,6 +71,7 @@ with open('input.txt') as f:
                     if len(gear_ratio_numbers) == 2:
                         ratios.append(gear_ratio_numbers[0] * gear_ratio_numbers[1])
         return ratios
+
     number_positions = map_number_positions()
     part_numbers = find_part_numbers(number_positions)
     gears_ratios = find_gear_ratios(number_positions, engine_schematic)
